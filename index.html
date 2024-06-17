@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Eligibility Checker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Job Eligibility Checker</h1>
+    <form id="eligibilityForm">
+        <label><input type="radio" name="education" value="Illiterate"> Illiterate</label>
+        <label><input type="radio" name="education" value="High school"> High school</label>
+        <label><input type="radio" name="education" value="UG"> UG</label>
+        <label><input type="radio" name="education" value="PG"> PG</label>
+        <label><input type="radio" name="education" value="Doctorate"> Doctorate</label>
+        <button type="button" onclick="checkEligibility()">Check Eligibility</button>
+    </form>
+    <div id="result" class="result"></div>
+</div>
+
+<script>
+    function checkEligibility() {
+        var radios = document.getElementsByName('education');
+        var selectedValue;
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                selectedValue = radios[i].value;
+                break;
+            }
+        }
+
+        var resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = '';
+
+        switch(selectedValue) {
+            case 'High school':
+            case 'UG':
+                resultDiv.textContent = 'You are eligible for the job.';
+                resultDiv.className = 'result eligible';
+                break;
+            case 'Illiterate':
+            case 'PG':
+            case 'Doctorate':
+                resultDiv.textContent = 'You are not eligible for the job.';
+                resultDiv.className = 'result not-eligible';
+                break;
+            default:
+                resultDiv.textContent = 'Please select an education level.';
+                resultDiv.className = 'result not-eligible';
+        }
+    }
+</script>
+
+</body>
+</html>
